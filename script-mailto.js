@@ -262,33 +262,38 @@ nextStep = function(step) {
     originalNextStep(step);
 };
 
-// Form submission using mailto (works without web server)
-function submitForm() {
+// Form submission using Vercel serverless function
+async function submitForm() {
     collectHouseholdMembers();
 
     // Prepare email content
     const emailContent = formatEmailContent();
     const subject = `Personal Almanac — ${primaryPerson.firstName} ${primaryPerson.lastName}`;
 
-    // Copy to clipboard
-    navigator.clipboard.writeText(emailContent).then(() => {
-        // Open mailto link
-        const mailto = `mailto:sunthar.premakumar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailContent)}`;
-        window.location.href = mailto;
+    try {
+        // Send email via API
+        const response = await fetch('/api/send-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                subject: subject,
+                body: emailContent
+            })
+        });
 
-        // Show thank you after a short delay
-        setTimeout(() => {
-            nextStep(5);
-        }, 1000);
-    }).catch(() => {
-        // Fallback if clipboard fails
-        const mailto = `mailto:sunthar.premakumar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailContent)}`;
-        window.location.href = mailto;
+        if (!response.ok) {
+            throw new Error('Failed to send email');
+        }
 
-        setTimeout(() => {
-            nextStep(5);
-        }, 1000);
-    });
+        // Show thank you page
+        nextStep(5);
+
+    } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('There was an error submitting the form. Please try again or contact us directly.');
+    }
 }
 
 function formatEmailContent() {
