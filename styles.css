@@ -1,0 +1,380 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-color: #F4F1ED;
+    --primary-accent: #6D4248;
+    --secondary-accent: #EA874B;
+    --white: #FFFFFF;
+    --black: #1A1A1A;
+    --gray-light: #E8E8E8;
+    --gray-medium: #9E9E9E;
+    --gray-dark: #4A4A4A;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--black);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+}
+
+.container {
+    width: 100%;
+    max-width: 700px;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.step {
+    display: none;
+    padding: 3rem 2.5rem;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.step.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.content.center {
+    text-align: center;
+}
+
+/* Step 1: Welcome */
+.title {
+    font-size: 2.5rem;
+    color: var(--primary-accent);
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: var(--gray-medium);
+    text-align: center;
+    margin-bottom: 2.5rem;
+    font-style: italic;
+}
+
+.welcome-text {
+    margin-bottom: 2.5rem;
+}
+
+.welcome-text p {
+    margin-bottom: 1.25rem;
+    font-size: 1.05rem;
+    color: var(--gray-dark);
+}
+
+/* Step Titles */
+.step-title {
+    font-size: 2rem;
+    color: var(--primary-accent);
+    margin-bottom: 0.75rem;
+}
+
+.step-description {
+    color: var(--gray-medium);
+    margin-bottom: 2rem;
+    font-size: 1rem;
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 1.75rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 1.75rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--black);
+    font-size: 0.95rem;
+}
+
+.required {
+    color: var(--secondary-accent);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+textarea {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 1.5px solid var(--gray-light);
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    background: var(--white);
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 0 3px rgba(109, 66, 72, 0.1);
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Checkboxes */
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.75rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 400;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.625rem;
+    cursor: pointer;
+    accent-color: var(--primary-accent);
+}
+
+/* Buttons */
+.btn-primary,
+.btn-secondary,
+.btn-add {
+    padding: 0.875rem 2rem;
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--primary-accent);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: #5a3539;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(109, 66, 72, 0.2);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--gray-dark);
+    border: 1.5px solid var(--gray-light);
+}
+
+.btn-secondary:hover {
+    background-color: var(--bg-color);
+    border-color: var(--gray-medium);
+}
+
+.btn-add {
+    background-color: transparent;
+    color: var(--secondary-accent);
+    border: 1.5px dashed var(--secondary-accent);
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.btn-add:hover {
+    background-color: rgba(234, 135, 75, 0.05);
+}
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+}
+
+.button-group .btn-primary {
+    margin-left: auto;
+}
+
+/* Household Member Cards */
+.household-member {
+    background: var(--bg-color);
+    border-radius: 8px;
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.member-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+}
+
+.member-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: var(--primary-accent);
+    font-weight: 600;
+}
+
+.btn-remove {
+    background: none;
+    border: none;
+    color: var(--gray-medium);
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+}
+
+.btn-remove:hover {
+    color: var(--secondary-accent);
+}
+
+/* Review Section */
+.review-person {
+    background: var(--bg-color);
+    border-radius: 8px;
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.review-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--primary-accent);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.review-details {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.review-item {
+    display: flex;
+    font-size: 0.95rem;
+}
+
+.review-label {
+    font-weight: 500;
+    color: var(--gray-dark);
+    min-width: 140px;
+}
+
+.review-value {
+    color: var(--black);
+}
+
+.review-edit {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1.5px solid var(--primary-accent);
+    color: var(--primary-accent);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.review-edit:hover {
+    background: var(--primary-accent);
+    color: var(--white);
+}
+
+/* Thank You */
+.thank-you-message {
+    font-size: 1.15rem;
+    color: var(--gray-dark);
+    margin-top: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    body {
+        padding: 1rem;
+    }
+
+    .step {
+        padding: 2rem 1.5rem;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .step-title {
+        font-size: 1.75rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .checkbox-group {
+        grid-template-columns: 1fr;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .button-group .btn-primary {
+        margin-left: 0;
+    }
+}

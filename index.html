@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Almanac</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Step 1: Welcome -->
+        <div class="step active" id="step-1">
+            <div class="content">
+                <h1 class="title">Personal Almanac</h1>
+                <p class="subtitle">A quiet place to remember the people I care about.</p>
+                <div class="welcome-text">
+                    <p>Preeth and Sunthar are trying to be better about staying in touch — birthdays, Christmas cards, play dates, dinner parties.</p>
+                    <p>This is a simple way to help us remember what matters: your address for cards, birthdays to celebrate, dietary preferences for when we cook together.</p>
+                    <p>Nothing you share here goes into a database or app. It just sends us a thoughtful note we can keep.</p>
+                </div>
+                <button class="btn-primary" onclick="nextStep(2)">Continue</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Primary Person -->
+        <div class="step" id="step-2">
+            <div class="content">
+                <h2 class="step-title">About You</h2>
+                <p class="step-description">Share what feels comfortable. Everything is optional except your name.</p>
+
+                <form id="primary-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name <span class="required">*</span></label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name <span class="required">*</span></label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Home Mailing Address</label>
+                        <textarea id="address" name="address" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birthday">Birthday</label>
+                        <input type="date" id="birthday" name="birthday">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Dietary Restrictions</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="dietary" value="Vegetarian">
+                                <span>Vegetarian</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="dietary" value="Vegan">
+                                <span>Vegan</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="dietary" value="Gluten Free">
+                                <span>Gluten Free</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="dietary" value="Dairy Free">
+                                <span>Dairy Free</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="dietary" value="No Seafood">
+                                <span>No Seafood</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="dietary" value="No Red Meat">
+                                <span>No Red Meat</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="dietary" value="No Egg">
+                                <span>No Egg</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="button" class="btn-secondary" onclick="prevStep(1)">Back</button>
+                        <button type="button" class="btn-primary" onclick="savePrimaryAndContinue()">Continue</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Step 3: Household Members -->
+        <div class="step" id="step-3">
+            <div class="content">
+                <h2 class="step-title">Household & Loved Ones</h2>
+                <p class="step-description">Would you like to add anyone else in your household?</p>
+
+                <div id="household-members"></div>
+
+                <button type="button" class="btn-add" onclick="addHouseholdMember()">+ Add Someone</button>
+
+                <div class="button-group">
+                    <button type="button" class="btn-secondary" onclick="prevStep(2)">Back</button>
+                    <button type="button" class="btn-primary" onclick="nextStep(4)">Continue</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: Review -->
+        <div class="step" id="step-4">
+            <div class="content">
+                <h2 class="step-title">Review</h2>
+                <p class="step-description">Here's what you're sharing with us.</p>
+
+                <div id="review-content"></div>
+
+                <div class="button-group">
+                    <button type="button" class="btn-secondary" onclick="prevStep(3)">Back</button>
+                    <button type="button" class="btn-primary" onclick="submitForm()">Submit</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 5: Thank You -->
+        <div class="step" id="step-5">
+            <div class="content center">
+                <h2 class="step-title">Thank You</h2>
+                <p class="thank-you-message">This helps me take better care of the people in my life.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script-mailto.js"></script>
+</body>
+</html>

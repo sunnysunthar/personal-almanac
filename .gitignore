@@ -1,0 +1,13 @@
+node_modules/
+.env
+.DS_Store
+*.log
+.claude/
+prd-personal-almanac.pdf
+server.log
+script.js
+script-simple.js
+server.js
+package.json
+.env.example
+test.html
