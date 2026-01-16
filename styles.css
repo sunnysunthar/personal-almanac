@@ -71,6 +71,14 @@ h1, h2, h3 {
     text-align: center;
 }
 
+/* Logo */
+.logo {
+    display: block;
+    margin: 0 auto 2rem auto;
+    max-width: 150px;
+    height: auto;
+}
+
 /* Step 1: Welcome */
 .title {
     font-size: 2.5rem;
