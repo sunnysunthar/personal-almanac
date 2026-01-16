@@ -227,6 +227,14 @@ textarea {
     box-shadow: 0 4px 12px rgba(109, 66, 72, 0.2);
 }
 
+.btn-primary:disabled {
+    background-color: var(--gray-light);
+    color: var(--gray-medium);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
 .btn-secondary {
     background-color: transparent;
     color: var(--gray-dark);

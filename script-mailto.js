@@ -3,6 +3,7 @@ let currentStep = 1;
 let primaryPerson = null;
 let householdMembers = [];
 let householdMemberCount = 0;
+let isSubmitting = false;
 
 // Navigation functions
 function nextStep(step) {
@@ -277,6 +278,19 @@ function formatPhoneNumber(phone) {
 
 // Form submission using Vercel serverless function
 async function submitForm() {
+    // Prevent double submission
+    if (isSubmitting) {
+        return;
+    }
+
+    isSubmitting = true;
+
+    // Disable submit button and show loading state
+    const submitBtn = document.querySelector('#step-4 .btn-primary');
+    const originalBtnText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+
     collectHouseholdMembers();
 
     // Prepare email content and structured data
@@ -308,6 +322,11 @@ async function submitForm() {
     } catch (error) {
         console.error('Error submitting form:', error);
         alert('There was an error submitting the form. Please try again or contact us directly.');
+
+        // Re-enable button on error
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+        isSubmitting = false;
     }
 }
 
