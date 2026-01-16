@@ -257,6 +257,24 @@ nextStep = function(step) {
     originalNextStep(step);
 };
 
+// Format phone number to standard US format: (XXX) XXX-XXXX
+function formatPhoneNumber(phone) {
+    if (!phone) return '';
+
+    // Remove all non-numeric characters
+    const cleaned = phone.replace(/\D/g, '');
+
+    // Format based on length
+    if (cleaned.length === 10) {
+        return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6)}`;
+    } else if (cleaned.length === 11 && cleaned[0] === '1') {
+        return `(${cleaned.slice(1, 4)}) ${cleaned.slice(4, 7)}-${cleaned.slice(7)}`;
+    }
+
+    // Return original if can't format
+    return phone;
+}
+
 // Form submission using Vercel serverless function
 async function submitForm() {
     collectHouseholdMembers();
@@ -310,7 +328,8 @@ function formatEmailContent() {
             content += `  • Email: ${person.email}\n`;
         }
         if (person.phone) {
-            content += `  • Phone: ${person.phone}\n`;
+            const formattedPhone = formatPhoneNumber(person.phone);
+            content += `  • Phone: ${formattedPhone}\n`;
         }
         if (person.address) {
             content += `  • Address: ${person.address}\n`;

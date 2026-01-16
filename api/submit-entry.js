@@ -1,3 +1,21 @@
+// Format phone number to standard US format: (XXX) XXX-XXXX
+function formatPhoneNumber(phone) {
+  if (!phone) return null;
+
+  // Remove all non-numeric characters
+  const cleaned = phone.replace(/\D/g, '');
+
+  // Format based on length
+  if (cleaned.length === 10) {
+    return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6)}`;
+  } else if (cleaned.length === 11 && cleaned[0] === '1') {
+    return `(${cleaned.slice(1, 4)}) ${cleaned.slice(4, 7)}-${cleaned.slice(7)}`;
+  }
+
+  // Return original if can't format
+  return phone;
+}
+
 export default async function handler(req, res) {
   // Only allow POST requests
   if (req.method !== 'POST') {
@@ -5,6 +23,9 @@ export default async function handler(req, res) {
   }
 
   const { subject, body, people } = req.body;
+
+  // Get current date for submission tracking
+  const submittedDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
 
   try {
     // 1. Send email using Resend
@@ -73,7 +94,7 @@ export default async function handler(req, res) {
               email: person.email || null,
             },
             'Phone Number': {
-              phone_number: person.phone || null,
+              phone_number: formatPhoneNumber(person.phone),
             },
             'Home Mailing Address': {
               rich_text: person.address ? [
@@ -91,6 +112,11 @@ export default async function handler(req, res) {
             },
             'Dietary Restrictions': {
               multi_select: person.dietary.map(diet => ({ name: diet })),
+            },
+            'Submitted On': {
+              date: {
+                start: submittedDate,
+              },
             },
           },
         }),
