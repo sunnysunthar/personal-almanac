@@ -88,11 +88,6 @@ function addHouseholdMember() {
         </div>
 
         <div class="form-group">
-            <label>Home Mailing Address</label>
-            <textarea name="hh-address-${householdMemberCount}" rows="3"></textarea>
-        </div>
-
-        <div class="form-group">
             <label>Birthday</label>
             <input type="date" name="hh-birthday-${householdMemberCount}">
         </div>
@@ -162,7 +157,7 @@ function collectHouseholdMembers() {
                 lastName: lastName,
                 email: memberDiv.querySelector(`input[name="hh-email-${index}"]`).value.trim(),
                 phone: memberDiv.querySelector(`input[name="hh-phone-${index}"]`).value.trim(),
-                address: memberDiv.querySelector(`textarea[name="hh-address-${index}"]`).value.trim(),
+                address: primaryPerson.address, // Use primary person's address
                 birthday: memberDiv.querySelector(`input[name="hh-birthday-${index}"]`).value,
                 dietary: dietary
             });
