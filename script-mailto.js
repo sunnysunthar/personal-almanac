@@ -261,25 +261,27 @@ nextStep = function(step) {
 async function submitForm() {
     collectHouseholdMembers();
 
-    // Prepare email content
+    // Prepare email content and structured data
     const emailContent = formatEmailContent();
     const subject = `Personal Almanac — ${primaryPerson.firstName} ${primaryPerson.lastName}`;
+    const allPeople = [primaryPerson, ...householdMembers];
 
     try {
-        // Send email via API
-        const response = await fetch('/api/send-email', {
+        // Send to API (email + Notion)
+        const response = await fetch('/api/submit-entry', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 subject: subject,
-                body: emailContent
+                body: emailContent,
+                people: allPeople
             })
         });
 
         if (!response.ok) {
-            throw new Error('Failed to send email');
+            throw new Error('Failed to submit entry');
         }
 
         // Show thank you page
