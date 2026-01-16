@@ -105,6 +105,18 @@ h1, h2, h3 {
     color: var(--gray-dark);
 }
 
+/* Welcome page continue button */
+#step-1 .btn-primary {
+    background-color: var(--secondary-accent);
+    display: block;
+    margin: 0 auto;
+}
+
+#step-1 .btn-primary:hover {
+    background-color: #d67a3d;
+    box-shadow: 0 4px 12px rgba(234, 135, 75, 0.3);
+}
+
 /* Step Titles */
 .step-title {
     font-size: 2rem;
